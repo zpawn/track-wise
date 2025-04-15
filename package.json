@@ -7,7 +7,7 @@
   "license": "MIT",
   "description": "TrackWise is an intelligent service that fetches your schedule from Google Calendar, generates AI-powered descriptions, and syncs tasks with Jira for efficient tracking.",
   "scripts": {
-    "start:dev": "nodemon ./api/dev.js"
+    "start:dev": "nodemon ./src/app.js"
   },
   "dependencies": {
     "@fastify/jwt": "^9.1.0",
