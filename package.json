@@ -1,14 +1,14 @@
 {
   "name": "track-wise",
   "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon ./src/app.js"
-  },
+  "main": "./src/app.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "TrackWise is an intelligent service that fetches your schedule from Google Calendar, generates AI-powered descriptions, and syncs tasks with Jira for efficient tracking.",
+  "scripts": {
+    "start:dev": "nodemon ./api/dev.js"
+  },
   "dependencies": {
     "@fastify/jwt": "^9.1.0",
     "bcryptjs": "^3.0.2",
