@@ -1,0 +1,18 @@
+name: track-wise
+region: us-east-1
+yamlVersion: 2
+backend:
+    path: .
+    language:
+        name: js
+        runtime: nodejs20.x
+    functions:
+        - name: fastify
+          path: .
+          entry: ./src/app.js
+          type: httpServer
+    scripts:
+        deploy:
+            - npm install
+        local:
+            - npm install

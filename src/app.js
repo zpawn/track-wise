@@ -6,7 +6,7 @@ const { userRoutes, authRoutes } = require("./routes");
 const { jwtPlugin, hasRolePlugin } = require("./plugins");
 
 mongoose
-  .connect(`${MONGODB_URI}/?authSource=admin`, { dbName: process.env.DB_NAME })
+  .connect(`${MONGODB_URI}/?authSource=admin`)
   .then(() => fastify.log.info("Connected DB"))
   .catch((error) => fastify.log.error("Error connecting to DB", error));
 
