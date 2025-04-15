@@ -18,6 +18,10 @@ fastify.register(hasRolePlugin);
 fastify.register(authRoutes, { prefix: "/api/v1" });
 fastify.register(userRoutes, { prefix: "/api/v1/users" });
 
+fastify.get('/', async (req, res) => {
+  return res.status(200).type("text/html").send("<h1>Hello, Fastify!</h1>");
+})
+
 const start = async () => {
   try {
     const port = process.env.PORT || 5001;
