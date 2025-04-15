@@ -1,0 +1,34 @@
+const fastify = require("fastify")({ logger: true });
+const mongoose = require("mongoose");
+require("dotenv").config();
+const { MONGODB_URI } = require("./constants");
+const { userRoutes, authRoutes } = require("./routes");
+const { jwtPlugin, hasRolePlugin } = require("./plugins");
+
+mongoose
+  .connect(`${MONGODB_URI}/?authSource=admin`, {
+    dbName: process.env.DB_NAME,
+  })
+  .then(() => fastify.log.info("Connected DB"))
+  .catch((error) => fastify.log.error("Error connecting to DB", error));
+
+fastify.register(jwtPlugin);
+fastify.register(hasRolePlugin);
+
+fastify.register(authRoutes, { prefix: "/api/v1" });
+fastify.register(userRoutes, { prefix: "/api/v1/users" });
+
+const start = async () => {
+  try {
+    const port = process.env.PORT || 5001;
+    const host = process.env.HOST || "0.0.0.0";
+
+    await fastify.listen({ port, host });
+    fastify.log.info(`Server is running on post ${fastify.server.address().port}`);
+  } catch (error) {
+    fastify.log.error(error);
+    process.exit(1);
+  }
+};
+
+start();
