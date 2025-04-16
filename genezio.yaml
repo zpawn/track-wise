@@ -1,8 +1,12 @@
 name: track-wise
 region: us-east-1
 yamlVersion: 2
+services:
+    databases:
+        - name: mongo-track-wise
+          type: mongo-atlas
 backend:
-    path: .
+    path: server
     language:
         name: js
         runtime: nodejs20.x

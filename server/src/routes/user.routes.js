@@ -7,8 +7,8 @@ const {
 } = require("../controllers/user.controller");
 
 const routes = (fastify, options) => {
-  fastify.addHook("onRequest", fastify.jwtAuth);
-  fastify.addHook("onRequest", fastify.hasRole(["admin"]));
+  // fastify.addHook("onRequest", fastify.jwtAuth);
+  // fastify.addHook("onRequest", fastify.hasRole(["admin"]));
 
   fastify.get("/", getUsers);
   fastify.get("/:id", getUser);

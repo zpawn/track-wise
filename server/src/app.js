@@ -1,24 +1,29 @@
+const path = require("node:path");
 const fastify = require("fastify")({ logger: true });
+const fastifyStatic = require("@fastify/static");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const { MONGODB_URI } = require("./constants");
+const { MONGODB_URI, ROOT_DIR } = require("./constants");
 const { userRoutes, authRoutes } = require("./routes");
 const { jwtPlugin, hasRolePlugin } = require("./plugins");
 
-mongoose
-  .connect(`${MONGODB_URI}/?authSource=admin`)
+mongoose.connect(`${MONGODB_URI}`)
   .then(() => fastify.log.info("Connected DB"))
   .catch((error) => fastify.log.error("Error connecting to DB", error));
 
-  fastify.register(jwtPlugin);
-  fastify.register(hasRolePlugin);
+fastify.register(jwtPlugin);
+fastify.register(hasRolePlugin);
 
-  fastify.register(authRoutes, { prefix: "/api/v1" });
-  fastify.register(userRoutes, { prefix: "/api/v1/users" });
+fastify.register(fastifyStatic, {
+  root: path.join(ROOT_DIR, "..", "public"),
+});
 
-  fastify.get('/', async (req, res) => {
-    return res.status(200).type("text/html").send("<h1>Hello, Fastify!</h1>");
-  });
+fastify.register(authRoutes, { prefix: "/api/v1" });
+fastify.register(userRoutes, { prefix: "/api/v1/users" });
+
+fastify.get('/', async (req, reply) => {
+  return reply.status(200).type("text/html").sendFile("index.html");
+});
 
 const start = async () => {
   try {
