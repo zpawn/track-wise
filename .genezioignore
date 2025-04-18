@@ -1,0 +1,9 @@
+client/
+node_modules/
+.editorconfig
+.env
+.env.*
+.gitignore
+docker-compose.yml
+package-lock.json
+package.json

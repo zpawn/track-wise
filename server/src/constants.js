@@ -1,4 +1,7 @@
+const path = require("node:path");
+
 const ROOT_DIR = __dirname;
+const PUBLIC_DIR = path.join(ROOT_DIR, "..", "public");
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
@@ -8,5 +11,6 @@ const MONGODB_URI = process.env.NODE_ENV === "development"
 
 module.exports = {
   ROOT_DIR,
+  PUBLIC_DIR,
   MONGODB_URI,
 };

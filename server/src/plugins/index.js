@@ -1,4 +1,4 @@
 module.exports = {
-  ...require("./jwtPlugin"),
-  ...require("./hasRolePlugin"),
+  ...require("./jwt-plugin"),
+  ...require("./has-role-plugin"),
 };

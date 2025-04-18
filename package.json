@@ -7,7 +7,8 @@
     "clean:public": "rimraf server/public/*",
     "copy:build": "npx cpy \"client/dist/**/*\" \"server/public\" --parents",
     "bundle:front": "npm run build:client && npm run mkdir:public && npm run clean:public && npm run copy:build",
-    "deploy": "npm run bundle:front && npx genezio deploy --env ./.env",
+    "deploy": "npx genezio deploy --env ./.env",
+    "release": "npm run bundle:front && npm run deploy",
     "start": "docker compose up",
     "stop": "docker compose down"
   },
